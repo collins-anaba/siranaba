@@ -25,22 +25,33 @@ export default class Navbar extends Component {
             <div className='bar'>
                 <nav>
                 
-                <div className='mobile-container' onclick={()=> this.handleclick()}>
+                {/* <div className='mobile-container' onclick={()=> this.handleClick()}>
                   <img className='Hamburger-Image' 
                  src="https://cdn2.iconfinder.com/data/icons/mobile-banking-ver-3a/100/1-48-512.png"
                  alt='menu-button'/>  
-                 </div>
+                 </div> */}
 
                 <div>
                  <ul>
-                <Link>Home</Link>
-                <Link>Reviews</Link>
-                <Link>News</Link>
-                <Link>Contact</Link>
+                <Link to='/Home'>Home</Link>
+                <Link to='/Reviews'>Reviews</Link>
+                <Link to='News'>News</Link>
+                <Link to='Contact'>Contact</Link>
                 <Link>Sign In</Link>
                  </ul>
+                 {this.state.menuStatus === 'open'?
+                 <div>
+                <ul>
+                <Link to='/Home'>Home</Link>
+                <Link to='/Reviews'>Reviews</Link>
+                <Link to='News'>News</Link>
+                <Link to='Contact'>Contact</Link>
+                <Link>Sign In</Link>
+                 </ul>
+                 </div> : null
+                }
                 </div>
-                
+
                 </nav>
             </div>
         )
