@@ -10,8 +10,8 @@ export default class App extends Component {
 return(
   <HashRouter>
   <div>
-    <Navbar/>
-    <Home/>
+    {/* <Navbar/> */}
+    {/* <Home/> */}
     {routes}
   </div>
   </HashRouter>
