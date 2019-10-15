@@ -8,15 +8,18 @@ export default class Home extends Component {
             posts: [],
             image: '',
             caption: '',
+            category: ''
 
 
         }
     }
+
+    componentDidMount
 render(){
     return (
         <div>
                 <img className="articleImage" src= '' alt="nike" />
-                
+                <h2></h2>
         </div>
     )
 }
