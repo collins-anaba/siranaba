@@ -43,5 +43,37 @@ req.session.user = {
     email: user.users_email
 }
 return res.send(req.session.user)
+},
+
+loginAdmin: (req, res) => {
+const {username, password} =req.body
+const db = req.app.get('db')
+db.admin(username).then(user => {
+    if(user.length > 0){
+        bcrypt.compare(password,user[0].password).then(doesMatch => {
+            if(doesMatch){
+                req.session.user.username = user[0].username;
+                        req.session.user.email = user[0].email;
+                        req.session.user.admin = true;
+                        res.status(200).json(req.session.user)
+            }else {
+                res.status(403).json({
+                    error: 'Username or password is incorrect'
+                })
+            }
+        })
+    } else {
+        res.status(404).json({
+            error: 'User does not exist'
+        })
+    }
+})
+},
+getSession: (req, res) => {
+    res.status(200).json(req.session)
+},
+logout:(req, res) => {
+    req.session.destroy();
+    res.status(200).send(req.session)
 }
 }
