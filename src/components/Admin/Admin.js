@@ -37,5 +37,13 @@ article: res.data
     });
 }
 
-
+render () {
+    return (
+         <div>
+             <button>Add</button>
+             <button>Edit</button>
+             <button>Delete</button>
+         </div>
+    )
+}
 }
