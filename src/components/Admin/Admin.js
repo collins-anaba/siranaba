@@ -6,10 +6,12 @@ export default class Admin extends Component {
 constructor(){
     super()
     this.state = {
+            article: [],
             newsArticle : '',
             newsImage:'',
             reviewsArticle: '',
-            reviewsImage: ''
+            reviewsImage: '',
+            articleParam: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit1 = this.onSubmit1.bind(this);
@@ -31,6 +33,21 @@ axios.post(`/api/news/`, {newsArticle,newsImage,reviewsArticle,reviewsImage}).th
     this.props.history.push('/')
 }).catch(err => console.log(err))
 }
+
+handleSubmit() {
+    axios
+      .put(`/api/reviews/${this.state.articleParam}`, {
+        reviewsImage: this.state.reviewsImage,
+        newsImage: this.state.newsImage,
+        newsArticle: this.state.newsArticle,
+        newsImage: this.state.newsImage        
+      })
+      .then(res => {
+        this.setState({
+          article: res.data
+        });
+      });
+  }
 
 onSubmit1 (e){
     const newNewsArticle = {
@@ -62,9 +79,10 @@ render () {
 
              <br/>
          <h1>Admin Page</h1>
+         {/* add article  */}
              <form onSubmit1={this.onSubmit1.bind(this)}>
                  <div className='input-field-newsImage'>
-                     <input type='image' name='newImage' ref='newsImage'/>
+                     <input type='file' name='newImage' ref='newsImage'/>
                      <label htmlFor='newsImage'/>
                  </div>
                  <div className='input-field-newsCaption'>
@@ -76,7 +94,7 @@ render () {
                  <br/>
              <form onSubmit2={this.onSubmit1.bind(this)}>
                  <div className='input-field-reviewsImage'>
-                     <input type='image' name='image' ref='news'/>
+                     <input type='file' name='image' ref='news'/>
                      <label htmlFor='image'/>
                  </div>
                  <div className='input-field-reviewsCaption'>
@@ -85,28 +103,32 @@ render () {
                      <button onClick={this.addArticle}>Add review article</button>
                  </div>
              </form>
-
-            <button className="edit-news-button" onClick={() => {this.setState({ showEdit: !this.state.showEdit }); }}>Edit News</button>
+            <br/>
+            {/* edit articles */}
+            <button className="edit-news-button" onClick={() => {this.setState({ showEdit: !this.state.showEdit }); }}>Edit News/Reviews</button>
             <div>{this.state.showEdit === true?(
                 <div>
                 <form onSubmit={this.handleSubmit}>
                     <h2>Change News Post</h2>
-                    <input placeholder='News Image'type='image' name='newsImage' value={this.state.newsImage} onChange={this.handleSubmit}/>
+                    <input placeholder='News Image'type='file' name='newsImage' value={this.state.newsImage} onChange={this.handleSubmit}/>
                     <br/>
-                    <input placeholder='News Article' type='text' name='newsArticle' value={this.state.newsArticle} onChange={this.handleSubmit}/>
+                    <input placeholder='News Article' type='text' name='newsArticle' value={this.state.newsParam} onChange={this.handleSubmit}/>
                     <button>Save Changes</button>
                     <br/>
                     <h2>Change Review Post</h2>
-                    <input placeholder='Reviews Image'type='image' name='reviewsImage' value={this.state.reviewsImage} onChange={this.handleSubmit}/>
+                    <input placeholder='Reviews Image'type='file' name='reviewsImage' value={this.state.reviewsImage} onChange={this.handleSubmit}/>
                     <br/>
                     <input placeholder='Reviews Article' type='text' name='reviewsArticle' value={this.state.reviewsArticle} onChange={this.handleSubmit}/>
                     <button>Save Changes</button>
                 </form>
                 </div>
-            )}</div>
-            <br/>
-            <button className="edit-review-button" onClick={() => {this.setState({ showEdit: !this.state.showEdit }); }}>Edit Reviews</button>
-            <br/>          
+            ): (
+                <div>
+
+                </div>
+            )}
+            </div>
+              <br/>    
             <button className='delete-article-button' onClick={this.onDelete}>Delete </button>
          </div>
     )
