@@ -53,7 +53,15 @@ onSubmit2 (e){
 
 render () {
     return (
+
+        
          <div>
+              <br/>
+              <br/>
+              <br/>
+
+             <br/>
+         <h1>Admin Page</h1>
              <form onSubmit1={this.onSubmit1.bind(this)}>
                  <div className='input-field-newsImage'>
                      <input type='image' name='newImage' ref='newsImage'/>
@@ -78,10 +86,21 @@ render () {
                  </div>
              </form>
 
+            <button className="edit-news-button" onClick={() => {this.setState({ showEdit: !this.state.showEdit }); }}>Edit News</button>
+            <div>{this.state.showEdit === true?(
+                <div>
+                <form onSubmit={this.handleSubmit}>
+                    <input type='image' name='newsImage' value={this.state.newsImage} onChange={this.handleSubmit}/>
+                    <br/>
+                    <input type='text' name='newsArticle' value={this.state.newsArticle} onChange={this.handleSubmit}/>
 
-             <button className="edit-article-button" onClick={() => {this.setState({ showEdit: !this.state.showEdit }); }}>Edit</button>
-             
-             {/* <button className='delete-article-button' onClick={this.onDelete.bind(this)}>Delete</button> */}
+                </form>
+                </div>
+            )}</div>
+            <br/>
+            <button className="edit-review-button" onClick={() => {this.setState({ showEdit: !this.state.showEdit }); }}>Edit Reviews</button>
+            <br/>          
+            <button className='delete-article-button' onClick={this.onDelete}>Delete </button>
          </div>
     )
 }
