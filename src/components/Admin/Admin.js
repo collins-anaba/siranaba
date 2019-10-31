@@ -90,10 +90,17 @@ render () {
             <div>{this.state.showEdit === true?(
                 <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type='image' name='newsImage' value={this.state.newsImage} onChange={this.handleSubmit}/>
+                    <h2>Change News Post</h2>
+                    <input placeholder='News Image'type='image' name='newsImage' value={this.state.newsImage} onChange={this.handleSubmit}/>
                     <br/>
-                    <input type='text' name='newsArticle' value={this.state.newsArticle} onChange={this.handleSubmit}/>
-
+                    <input placeholder='News Article' type='text' name='newsArticle' value={this.state.newsArticle} onChange={this.handleSubmit}/>
+                    <button>Save Changes</button>
+                    <br/>
+                    <h2>Change Review Post</h2>
+                    <input placeholder='Reviews Image'type='image' name='reviewsImage' value={this.state.reviewsImage} onChange={this.handleSubmit}/>
+                    <br/>
+                    <input placeholder='Reviews Article' type='text' name='reviewsArticle' value={this.state.reviewsArticle} onChange={this.handleSubmit}/>
+                    <button>Save Changes</button>
                 </form>
                 </div>
             )}</div>
